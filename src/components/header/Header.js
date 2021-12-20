@@ -7,7 +7,7 @@ export default function Header() {
     <div className="header">
       <img
         className="header__logo"
-        src="https://www.seekpng.com/png/detail/428-4289671_logo-e-commerce-good-e-commerce-logo.png"
+        src="http://pngimg.com/uploads/amazon/amazon_PNG11.png"
         alt=""
       />
 
