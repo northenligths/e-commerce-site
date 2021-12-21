@@ -3,7 +3,10 @@ import "./header.css";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import { Link } from "react-router-dom";
+import { useStateValue } from "../../StateProvider";
+
 export default function Header() {
+  const [{ basket }, dispatch] = useStateValue(); //calling context,destructured basket from state
   return (
     <div className="header">
       <Link to="/">
@@ -37,7 +40,10 @@ export default function Header() {
         <Link to="/checkout">
           <div className="header__optionBasket">
             <ShoppingBasketIcon />
-            <span className="header__optionLineTwo header__basketCount">0</span>
+            <span className="header__optionLineTwo header__basketCount">
+              {/* updates the count of items added in the basket */}
+              {basket.length}
+            </span>
           </div>
         </Link>
       </div>

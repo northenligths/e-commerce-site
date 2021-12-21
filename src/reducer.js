@@ -10,6 +10,7 @@ const reducer = (state, action) => {
       return {
         ...state, //this means return the original state
         basket: [...state.basket, action.item], //this means return the state of the basket with the item which is to be added in the basket
+        //item contains id,price,image,title,rating
       };
     default:
       return state;
