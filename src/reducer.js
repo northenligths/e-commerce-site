@@ -18,6 +18,23 @@ const reducer = (state, action) => {
         basket: [...state.basket, action.item], //this means return the state of the basket with the item which is to be added in the basket
         //item contains id,price,image,title,rating
       };
+
+    case "REMOVE_FROM_BASKET": //function to remove items from the basket
+      const index = state.basket.findIndex(
+        (basketItem) => basketItem.id === action.id
+      ); //this find index function finds the index of the item in which the id of the item matches with id of action dispatched and return the only the very first match found
+      let newBasket = [...state.basket]; //copying the new current state of basket into a new variable
+      if (index >= 0) {
+        newBasket.splice(index, 1); //this splice function goes to the specific index of the item and cuts or deletes the item with that specific index and rest of the elements are as it is in the array
+      } else {
+        console.warn(
+          `Cant remove product(id: ${action.id}) as its not in basket`
+        );
+      }
+      return {
+        ...state,
+        basket: newBasket, //return state with new basket
+      };
     default:
       return state;
   }
