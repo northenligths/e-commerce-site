@@ -1,7 +1,10 @@
 import React from "react";
+import { useStateValue } from "../../StateProvider";
+import CheckoutProduct from "../checkoutProduct/CheckoutProduct";
 import Subtotal from "../subtotal/Subtotal";
 import "./checkout.css";
 function Checkout() {
+  const [{ basket }, dispatch] = useStateValue(); //calling the context
   return (
     <div className="checkout">
       <div className="checkout__left">
@@ -12,7 +15,16 @@ function Checkout() {
         />
         <div className="">
           <h2 className="checkout__title">Your Shopping Basket</h2>
-          {/* Basket Item */}
+          {/* //here we are mapping through the basket array and displaying checkoutProduct component(with props) for every item added in the list */}
+          {basket.map((item) => (
+            <CheckoutProduct
+              id={item.id}
+              title={item.title}
+              image={item.image}
+              price={item.price}
+              rating={item.rating}
+            />
+          ))}
         </div>
       </div>
       <div className="checkout__right">
