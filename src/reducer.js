@@ -3,6 +3,12 @@ export const initialState = {
   basket: [],
 };
 
+export const getBasketTotal = (basket) =>
+  //function to get total prices of the items in the basket
+  basket?.reduce((amount, item) => item.price + amount, 0);
+//reduce function is used to iterate the basket array and get us total price of the items in the basket
+//here 0 is the initial amount
+
 const reducer = (state, action) => {
   //reducer will listen to the action dispatched and perform functions accordingly
   switch (action.type) {
