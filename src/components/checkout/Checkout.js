@@ -4,7 +4,7 @@ import CheckoutProduct from "../checkoutProduct/CheckoutProduct";
 import Subtotal from "../subtotal/Subtotal";
 import "./checkout.css";
 function Checkout() {
-  const [{ basket }, dispatch] = useStateValue(); //calling the context
+  const [{ basket, user }, dispatch] = useStateValue(); //calling the context
   return (
     <div className="checkout">
       <div className="checkout__left">
@@ -14,6 +14,7 @@ function Checkout() {
           alt=""
         />
         <div className="">
+          <h3>Hello,{user?.email}</h3>
           <h2 className="checkout__title">Your Shopping Basket</h2>
           {/* //here we are mapping through the basket array and displaying checkoutProduct component(with props) for every item added in the list */}
           {basket.map((item) => (

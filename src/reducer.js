@@ -1,6 +1,7 @@
 //Here we will create the initial state and reducer
 export const initialState = {
   basket: [],
+  user: null, //by default the user will be null
 };
 
 export const getBasketTotal = (basket) =>
@@ -34,6 +35,12 @@ const reducer = (state, action) => {
       return {
         ...state,
         basket: newBasket, //return state with new basket
+      };
+
+    case "SET_USER": //function to create user and set user details
+      return {
+        ...state, //original state
+        user: action.user, //this will be the user that will be dispatched and called in app.js
       };
     default:
       return state;

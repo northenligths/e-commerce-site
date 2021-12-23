@@ -4,9 +4,16 @@ import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import { Link } from "react-router-dom";
 import { useStateValue } from "../../StateProvider";
+import { auth } from "../../firebase";
 
 export default function Header() {
-  const [{ basket }, dispatch] = useStateValue(); //calling context,destructured basket from state
+  const [{ basket, user }, dispatch] = useStateValue(); //calling context,destructured basket and user from state
+
+  const handleAuthentication = () => {
+    if (user) {
+      auth.signOut(); //firebase function to sign out the user
+    }
+  };
   return (
     <div className="header">
       <Link to="/">
@@ -23,10 +30,15 @@ export default function Header() {
       </div>
 
       <div className="header__nav">
-        <Link to="/login">
-          <div className="header__option">
-            <span className="header__optionLineOne">Hello Guest</span>
-            <span className="header__optionLineTwo">Sign In</span>
+        {/* This means that if there is no use logged in the only display the login page */}
+        <Link to={!user && "/login"}>
+          <div onClick={handleAuthentication} className="header__option">
+            <span className="header__optionLineOne">
+              Hello {!user ? "Guest" : user.email}
+            </span>
+            <span className="header__optionLineTwo">
+              {user ? "Sign Out" : "Sign In"}
+            </span>
           </div>
         </Link>
 
